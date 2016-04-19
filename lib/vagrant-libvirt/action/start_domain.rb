@@ -73,7 +73,7 @@ module VagrantPlugins
               cpu = REXML::XPath.first(xml_descr,'/domain/cpu')
               if cpu.nil?
                 descr_changed = true
-                cpu = REXML::Element.new('cpu', REXML::XPath.first(xml_descr,'/domain'))
+                #cpu = REXML::Element.new('cpu', REXML::XPath.first(xml_descr,'/domain'))
                 cpu.attributes['mode'] = config.cpu_mode
               else
                 if cpu.attributes['mode'] != config.cpu_mode
@@ -83,11 +83,11 @@ module VagrantPlugins
               end
 
               if config.cpu_mode != 'host-passthrough'
-                cpu_model = REXML::XPath.first(xml_descr,'/domain/cpu/model')
+                #cpu_model = REXML::XPath.first(xml_descr,'/domain/cpu/model')
                 if cpu_model.nil?
                   descr_changed = true
-                  cpu_model = REXML::Element.new('model', REXML::XPath.first(xml_descr,'/domain/cpu'))
-                  cpu_model.attributes['fallback'] = 'allow'
+                  #cpu_model = REXML::Element.new('model', REXML::XPath.first(xml_descr,'/domain/cpu'))
+                  #cpu_model.attributes['fallback'] = 'allow'
                   cpu_model.text = config.cpu_model
                 else
                   if cpu_model.text != config.cpu_model

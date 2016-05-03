@@ -14,7 +14,14 @@ Vagrant.configure(2) do |config|
   # Every Vagrant development environment requires a box. You can search for
   # boxes at https://atlas.hashicorp.com/search.
   #config.vm.box = "uvsmtid/centos-7.0-minimal"
-  config.vm.box = "/root/GIT/vagrant-libvirt/tools/fedora21.box"
+  #config.vm.box = "/root/GIT/vagrant-libvirt/tools/fedora21.box"
+  #config.vm.box = "/var/lib/libvirt/images/ubuntu-14.04-ppc64.box"
+  #config.vm.box = "/root/ubuntu.14.04.box"
+  #config.vm.box = "ubuntu-16.04-ppc64le"
+  #config.vm.box = "rhel72-ppc6"
+  #config.vm.box = "rhel72-ppc64le.new.1"
+  config.vm.box = "ubuntu-15.04-ppc64le.2"
+  #config.vm.box = "/root/GIT/vagrant-libvirt/tools/vm-ppc64-2.box"
 
 config.vm.provider :libvirt do |libvirt|
 
@@ -116,14 +123,30 @@ config.vm.provider :libvirt do |libvirt|
   		push.script = "my-script.sh"
 	end
  config.vm.provider :libvirt do |domain|
-      domain.memory = "2048"
-      domain.cpus = "2"
+      domain.memory = "6096"
+      domain.cpus = "1"
       domain.machine_type = "pseries"
-      domain.cpu_model = "power8"
+      #domain.machine_type = "pseries-2.6"
+      #domain.machine_type = "powernv"
+      #domain.machine_type = "pseries-2.1"
+      #domain.cpu_model = "POWER8"
+      domain.cpu_model = "POWER7"
       domain.cpu_mode = "custom"
-      #domain.video_type = "vga"
+      domain.video_type = "none"
       domain.graphics_type = "none"
       domain.machine_arch = "ppc64"
+      domain.nested = false
+      domain.disk_bus = "scsi"
+      #domain.kernel = "/root/powernv/zImage.epapr"
+      #domain.cmd_line = "-kernel console=ttyS0"
       domain.emulator_path = "/usr/bin/qemu-system-ppc64" 
+      #domain.emulator_path = "/root/qemu/qemu-2.6.0-rc3/ppc64-softmmu/qemu-system-ppc64" 
+      #domain.emulator_path = "/root/powernv/qemu-pnv/bin/qemu-system-ppc64" 
    end
+#  config.vm.network :private_network do |network|
+#      network.dev = "virbr1"
+#      netowrk.mode = "bridge"
+#      netowrk.type = "bridge"
+#  end
+config.ssh.password = "vagrant"
 end
